@@ -3,6 +3,7 @@ import 'package:analytics/ui/chart.dart';
 //import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required String title}) : super(key: key);
 
@@ -22,13 +23,35 @@ Widget build(BuildContext context) {
       appBar: AppBar(
         leading: const Icon(Icons.menu_rounded),
         title: const Text('Analytics'),
-        actions: const [
-          Icon(Icons.search),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+        actions: [
+          PopupMenuButton(
+            icon: const Icon(Icons.more_vert),
+            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+               PopupMenuItem(
+                child:  ListTile(
+                  leading: const Icon(Icons.light),
+                  title: const Text('Light'),
+                  onTap:  () {
+                    Get.changeTheme(ThemeData.light());
+                  },
+                ),
+              ),
+               PopupMenuItem(
+                child: ListTile(
+                  leading: const Icon(Icons.add),
+                  title: const Text('Dark'),
+                  onTap:(){
+                    Get.changeTheme(ThemeData.dark());
+                  }
+                ),
+              ),
+              const PopupMenuDivider(),
+              //const PopupMenuItem(child: Text('Item A')),
+              //const PopupMenuItem(child: Text('Item B')),
+            ],
           ),
-          Icon(Icons.more_vert),
         ],
+
       ),
 
       body: SingleChildScrollView(
@@ -176,45 +199,45 @@ Widget build(BuildContext context) {
                         Text('  +56.6%% of target',
                             style: TextStyle(fontSize: 15)
                         ),
-
+                      ],
+                    ),
+                  ),
+                ),
+                StaggeredGridTile.count(
+                  crossAxisCellCount: 1,
+                  mainAxisCellCount: 168/234,
+                  child: Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Avg.session'),
+                        ),
+                        Text(' 4:35 H',
+                            style: TextStyle(fontSize: 40,)),
+                        Text('  +56.6%% of target',
+                            style: TextStyle(fontSize: 15)
+                        ),
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-            Align(
-                alignment: Alignment.topRight,
-                child: FloatingActionButton(
-                  backgroundColor: const Color(0xff03dac6),
-                  foregroundColor: Colors.black,
-                  //mini: true,
-                  onPressed: () {
-                    // Respond to button press
-                  },
-                  child: const Icon(Icons.add),
-                )
-            ),
 
+            
           ],
         ),
-      )
+      ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        //Get.changeTheme(Get.isDarkMode? ThemeData.light(): ThemeData.dark());
+      },
+      backgroundColor: Colors.blue,
+      child: const Icon(Icons.add),
+    ),
+
   );
 }
-
-
-
-
-
-
-
-
-
-
-  // floatingActionButon: FloatingActionButton(
-  // onPressed: _incrementCounter,
-  // tooltip: 'Increment',
-  // child: const Icon(Icons.add,color: Colors.black),
-  // backgroundColor: Colors.blue,
-  // );
 }
