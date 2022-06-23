@@ -1,5 +1,6 @@
 import 'package:analytics/ui/bar_chart.dart';
 import 'package:analytics/ui/chart.dart';
+import 'package:analytics/ui/color_picker_page.dart';
 //import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -43,6 +44,15 @@ Widget build(BuildContext context) {
                   onTap:(){
                     Get.changeTheme(ThemeData.dark());
                   }
+                ),
+              ),
+              PopupMenuItem(
+                child: ListTile(
+                    leading: const Icon(Icons.access_time_sharp),
+                    title: const Text('Color Picker'),
+                    onTap:(){
+                      Get.to(const ColorPickerPage());
+                    }
                 ),
               ),
               const PopupMenuDivider(),
